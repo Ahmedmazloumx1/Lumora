@@ -1,0 +1,71 @@
+/*
+ * Lumora - Shared dark and gold theme
+ */
+
+:root {
+    --bg-primary: #111111 !important;
+    --bg-secondary: #1C1C1F !important;
+    --accent-gold: #D4AF37;
+    --accent-gold-hover: #AA820A;
+    --primary: #D4AF37 !important;
+    --primary-dark: #AA820A !important;
+    --primary-light: #E8C765 !important;
+    --success: #27AE60 !important;
+    --danger: #EB5757 !important;
+    --warning: #F2C94C !important;
+    --text-white: #FFFFFF !important;
+    --text-muted: #8B8B8B !important;
+    --font-heading: 'Bebas Neue', sans-serif !important;
+    --font-headings: 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', sans-serif !important;
+}
+
+/* Base resets */
+html, body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-white) !important;
+    font-family: var(--font-body) !important;
+}
+
+/* Force body backgrounds dark */
+body {
+    background-color: #111111 !important;
+}
+
+/* Global Navbar Styling */
+.navbar.fixed-top {
+    background-color: #111111 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Shared primary button styling */
+.btn-primary, .btn-warning {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: #111111 !important;
+}
+.btn-primary:hover, .btn-warning:hover {
+    background-color: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
+}
+
+/* Products card containers */
+.product-card {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+.product-card .card-body {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-white) !important;
+}
+
+/* Search input focus reset */
+.live-search-input {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-white) !important;
+}
+.live-search-input:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.25) !important;
+}

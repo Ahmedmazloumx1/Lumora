@@ -1,0 +1,12 @@
+Options -Indexes
+DirectoryIndex index.php
+RewriteEngine On
+
+# Only the front controller and public assets may be requested.
+RewriteRule ^(?:app|config|database|archive|storage|scripts|tests|\.tools)(?:/|$) - [F,L,NC]
+RewriteRule (^|/)\. - [F,L]
+RewriteRule ^public/.*\.(?:php\d*|phtml|phar|sql|ini|log)$ - [F,L,NC]
+RewriteRule ^public/.*\.(?:css|js|png|jpe?g|webp|svg|ico|woff2?|ttf|eot)$ - [L,NC]
+RewriteRule ^index\.php$ - [L]
+RewriteRule \.[^/]+$ - [F,L]
+RewriteRule ^ index.php [QSA,L]

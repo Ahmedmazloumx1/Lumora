@@ -1,0 +1,198 @@
+PASS / has no PHP errors
+PASS / responds 200
+PASS /login has no PHP errors
+PASS /login responds 200
+PASS /register has no PHP errors
+PASS /register responds 200
+PASS /products has no PHP errors
+PASS /products responds 200
+PASS /about has no PHP errors
+PASS /about responds 200
+PASS /faq has no PHP errors
+PASS /faq responds 200
+PASS /policies has no PHP errors
+PASS /policies responds 200
+PASS /cart has no PHP errors
+PASS /cart responds 200
+PASS /public/css/style.css has no PHP errors
+PASS /public/css/style.css responds 200
+PASS /public/img/placeholder.svg has no PHP errors
+PASS /public/img/placeholder.svg responds 200
+PASS /missing has no PHP errors
+PASS Unknown route returns 404
+PASS /product?slug=missing has no PHP errors
+PASS Missing product returns 404
+PASS /config/config.php has no PHP errors
+PASS /config/config.php is not publicly accessible
+PASS /archive/legacy/reset_admin.php has no PHP errors
+PASS /archive/legacy/reset_admin.php is not publicly accessible
+PASS /database/schema.sql has no PHP errors
+PASS /database/schema.sql is not publicly accessible
+PASS /.tools/php/php.ini has no PHP errors
+PASS /.tools/php/php.ini is not publicly accessible
+PASS /bootstrap.php has no PHP errors
+PASS /bootstrap.php is not publicly accessible
+PASS /app/Core/Database.php has no PHP errors
+PASS /app/Core/Database.php is not publicly accessible
+PASS /account has no PHP errors
+PASS /account requires authentication
+PASS /checkout has no PHP errors
+PASS /checkout requires authentication
+PASS /wishlist has no PHP errors
+PASS /wishlist requires authentication
+PASS /custom-order has no PHP errors
+PASS /custom-order requires authentication
+PASS /admin has no PHP errors
+PASS /admin requires authentication
+PASS /cart/add has no PHP errors
+PASS Missing CSRF token rejected
+PASS /cart/add has no PHP errors
+PASS Array CSRF token rejected
+PASS /api/search-suggestions?query=Lumora has no PHP errors
+PASS Search suggestions return matching products
+PASS /product?slug=lumora-sample-wall-art has no PHP errors
+PASS /product?slug=lumora-sample-wall-art responds 200
+PASS /cart/add has no PHP errors
+PASS Zero quantity rejected
+PASS /cart/add has no PHP errors
+PASS Mismatched variant rejected
+PASS /cart/add has no PHP errors
+PASS Guest can add product
+PASS /cart has no PHP errors
+PASS /cart responds 200
+PASS /login has no PHP errors
+PASS /login responds 200
+PASS /cart has no PHP errors
+PASS /cart responds 200
+PASS /cart/update has no PHP errors
+PASS Another guest cannot update cart item
+PASS /cart/remove has no PHP errors
+PASS Another guest cannot remove cart item
+PASS /cart/update has no PHP errors
+PASS Quantity cannot exceed stock
+PASS /cart/update has no PHP errors
+PASS Owner can update quantity
+PASS /cart/update has no PHP errors
+PASS Cart quantity form redirects back to cart
+PASS /cart/update has no PHP errors
+PASS /cart/add has no PHP errors
+PASS Valid variant can be added
+PASS /cart has no PHP errors
+PASS /cart responds 200
+PASS Variant price and attributes render
+PASS /cart/remove has no PHP errors
+PASS Owner can remove cart item
+PASS /cart has no PHP errors
+PASS /cart responds 200
+PASS Removed product leaves cart
+PASS /register has no PHP errors
+PASS Malformed email registration rejected
+PASS /register has no PHP errors
+PASS /register responds 200
+PASS /register has no PHP errors
+PASS Customer registration succeeds
+PASS Session ID rotates after registration
+PASS /cart has no PHP errors
+PASS /cart responds 200
+PASS Guest cart transferred into user cart
+PASS /cart has no PHP errors
+PASS /cart responds 200
+PASS Transferred cart retains product
+PASS /account has no PHP errors
+PASS /account responds 200
+PASS /checkout has no PHP errors
+PASS /checkout responds 200
+PASS /wishlist has no PHP errors
+PASS /wishlist responds 200
+PASS /custom-order has no PHP errors
+PASS /custom-order responds 200
+PASS /custom-order/status has no PHP errors
+PASS /custom-order/status responds 200
+PASS /admin has no PHP errors
+PASS Customer cannot access admin
+PASS /wishlist/toggle has no PHP errors
+PASS Wishlist adds product
+PASS /wishlist has no PHP errors
+PASS /wishlist responds 200
+PASS Wishlist displays saved product
+PASS /account/profile has no PHP errors
+PASS Profile updates
+PASS /account has no PHP errors
+PASS /account responds 200
+PASS Profile text escapes HTML once
+PASS /custom-order has no PHP errors
+PASS Custom order submits
+PASS /custom-order/status has no PHP errors
+PASS /custom-order/status responds 200
+PASS Custom order status displays request
+PASS /checkout has no PHP errors
+PASS Checkout succeeds
+PASS /checkout/success has no PHP errors
+PASS /checkout/success responds 200
+PASS Order totals, stock, and cart clearing correct
+PASS /cart/add has no PHP errors
+PASS /checkout has no PHP errors
+PASS Checkout rejects exhausted stock
+PASS Failed checkout creates no order
+PASS /logout has no PHP errors
+PASS /login has no PHP errors
+PASS /login responds 200
+PASS /login has no PHP errors
+PASS Password with special characters authenticates
+PASS /login has no PHP errors
+PASS /login responds 200
+PASS /login has no PHP errors
+PASS Administrator login succeeds
+PASS / has no PHP errors
+PASS / responds 200
+PASS /admin has no PHP errors
+PASS /admin responds 200
+PASS /admin/products has no PHP errors
+PASS /admin/products responds 200
+PASS /admin/orders has no PHP errors
+PASS /admin/orders responds 200
+PASS /admin/users has no PHP errors
+PASS /admin/users responds 200
+PASS /admin/categories has no PHP errors
+PASS /admin/categories responds 200
+PASS /admin/custom-orders has no PHP errors
+PASS /admin/custom-orders responds 200
+PASS /admin/content has no PHP errors
+PASS /admin/content responds 200
+PASS /admin/content/update has no PHP errors
+PASS CMS accepts FAQ arrays
+PASS /faq has no PHP errors
+PASS /faq responds 200
+PASS FAQ text renders once escaped
+PASS /admin/content/update has no PHP errors
+PASS Logo image upload succeeds
+PASS Uploaded logo saved
+PASS / has no PHP errors
+PASS / responds 200
+PASS Uploaded logo appears in storefront header
+PASS /admin/categories/add has no PHP errors
+PASS Category creation succeeds
+PASS /admin/categories has no PHP errors
+PASS /admin/categories responds 200
+PASS New category renders
+PASS /admin/products/duplicate has no PHP errors
+PASS Product duplication succeeds
+PASS /admin/products/duplicate has no PHP errors
+PASS Repeated duplication uses unique SKU
+PASS /admin/products/bulk-edit has no PHP errors
+PASS Bulk price subtraction cannot become negative
+PASS /admin/orders/update has no PHP errors
+PASS /admin/custom-orders/update has no PHP errors
+PASS Admin order and custom-order status updates persist
+PASS /admin/orders/update has no PHP errors
+PASS Invalid order statuses are ignored
+PASS /admin/categories/delete has no PHP errors
+PASS Category deletion succeeds
+PASS /admin/products/delete has no PHP errors
+PASS Product soft deletion succeeds
+PASS /admin/users/delete has no PHP errors
+PASS Customer soft deletion succeeds
+PASS Server log has no PHP runtime errors
+
+195 checks passed.
+Disposable database removed.

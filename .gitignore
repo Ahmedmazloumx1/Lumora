@@ -1,0 +1,17 @@
+/.tools/
+/config/local.php
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+/storage/logs/*
+/storage/sessions/*
+!/storage/logs/.gitkeep
+!/storage/sessions/.gitkeep
+/archive/
+/database/legacy/
+/public/img/*.jpg
+/public/img/*.jpeg
+/public/img/*.webp
+/public/img/*.png
