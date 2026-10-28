@@ -1,0 +1,49 @@
+name: SQA Gate
+on:
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: sqa-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  quality:
+    name: PHP JavaScript SQL and security
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: disposable-ci-only
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    env:
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: disposable-ci-only
+      APP_ENV: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql, fileinfo, mbstring
+          coverage: none
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Static syntax and credential checks
+        run: node scripts/sqa-checks.mjs
+      - name: Isolated storefront and SQL regression suite
+        run: node tests/smoke.mjs
+      - name: PHP static analysis
+        run: |
+          composer global require --dev phpstan/phpstan:2.3.3 --no-interaction --no-progress
+          composer global audit --locked
+          "$(composer global config bin-dir --absolute)/phpstan" analyse -c phpstan.neon --no-progress
