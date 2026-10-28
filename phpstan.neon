@@ -1,0 +1,8 @@
+parameters:
+    level: 0
+    paths:
+        - app
+        - scripts
+    scanFiles:
+        - bootstrap.php
+    tmpDir: .tools/phpstan-cache
