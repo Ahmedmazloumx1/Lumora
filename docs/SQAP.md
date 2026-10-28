@@ -16,7 +16,9 @@ To Do → In Progress → In Review → QA Gate → Done is the intended develop
 
 Main is the release branch; develop is optional and should only be introduced if the team needs an integration branch. Use feature/LMR-XX-description, bugfix/LMR-XX-description or hotfix/LMR-XX-description with an existing Jira key. PR titles begin LMR-XX:. Commit convention: LMR-XX: imperative summary. The actual project key is LMR, not SCRUM.
 
-Require one independent approval, passing SQA Gate, resolved review conversations and no direct pushes where repository administration permits. Do not approve one's own PR or report protections as enforced without checking GitHub settings. The connected integration currently has push but no admin permission; owner action or a suitable authenticated administrator is needed for protection settings.
+Main now requires one independent approval, approval of the latest push, dismissal of stale approvals, the passing PHP JavaScript SQL and security check, an up-to-date branch and resolved review conversations. Administrators cannot bypass these rules; force pushes and deletions are disabled. GitHub Free confirms enforcement for this currently public repository. Verify these settings again if its visibility or plan changes. PR #1 is open and cannot merge until genuine peer review.
+
+GitHub for Atlassian is installed for Ahmedmazloumx1/Lumora only, with owner approval. LMR-41's native Development panel shows its feature branch, commit/build information and open PR #1. Optional Rovo indexing was left disabled.
 
 ## Tests and defects
 
@@ -50,3 +52,13 @@ Each requires its own genuine implementation, personal reviewer, passing checks 
 ## Verified local evidence on 28 October 2026
 
 The existing isolated smoke suite passed 195 checks and removed its disposable database. The static scanner passed 67 PHP files and two JavaScript modules; PHPStan 2.3.3 at level 0 reported no errors. These are local results, not GitHub Actions results or proof that all recorded defects are fixed. Inline JavaScript rendered inside PHP templates is outside the standalone JavaScript syntax scan. Credential-pattern checks are limited and do not constitute a full vulnerability assessment.
+
+The initial hosted SQA Gate passed in run 40682129938 for commit 6c54d51665fe0c61ae23e71c33dba20d8f88a23c. Later revisions must pass their own run. Gate logs are retained for 14 days as workflow artifacts; explicit Bash pipefail behavior preserves failures when output is captured with tee.
+
+## Jira consolidation and execution policy
+
+LMR has five Epics and 18 development Stories. Ten active Feature groupings are retained alongside seven deferred/reference Feature records to preserve meaningful earlier work. Native Feature-to-Story parenting is unavailable on this Jira plan; both are direct Epic children, with explicitly described Feature associations. This limitation remains open and is not represented as a native three-level hierarchy.
+
+The 18 Story estimates total 90 provisional points: Ahmed Mazloum 29, Abdulrahman Maher 30, Nermeen 31. These include historical baseline scope and are not sprint velocity. Existing 14–28 October sprint dates are preserved; the next proposed two-week sprints cover hardening and release/QA. Sara awaits an actual Jira account. Each Story names a different proposed verifier.
+
+The release suite reuses 36 Test Cases (two per Story) covering all Story criteria, with independent testers. All remain Active / Not Executed. The original 119 Test Cases are retained for historical and extended coverage; 83 are outside the compact release view. No test result was inferred from a Story's Done state. Four previously reproduced defects remain Open with pending fixes and retests. Quality Task and Technical Debt use separate work types; no development Task or Subtask issues are used.
