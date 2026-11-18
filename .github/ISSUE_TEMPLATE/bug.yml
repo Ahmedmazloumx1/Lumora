@@ -1,0 +1,26 @@
+name: Confirmed defect
+description: Record reproducible behavior and traceability
+title: "[Bug] "
+body:
+  - type: input
+    id: jira
+    attributes: {label: Jira Story and Test Case links}
+    validations: {required: true}
+  - type: textarea
+    id: steps
+    attributes: {label: Preconditions and numbered reproduction steps}
+    validations: {required: true}
+  - type: textarea
+    id: result
+    attributes: {label: Expected and actual results with safe evidence}
+    validations: {required: true}
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options: [Critical, Major, Minor, Trivial]
+    validations: {required: true}
+  - type: input
+    id: environment
+    attributes: {label: Environment and target commit}
+    validations: {required: true}
