@@ -1,0 +1,15 @@
+name: Quality improvement or technical debt
+description: A real quality outcome with verification
+body:
+  - type: input
+    id: jira
+    attributes: {label: Actual Jira Quality Task or Technical Debt key}
+    validations: {required: true}
+  - type: textarea
+    id: outcome
+    attributes: {label: Problem, scope and measurable acceptance criteria}
+    validations: {required: true}
+  - type: textarea
+    id: evidence
+    attributes: {label: Verification plan, dependencies and evidence}
+    validations: {required: true}
