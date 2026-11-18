@@ -1,0 +1,27 @@
+name: PR traceability
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, edited, ready_for_review]
+permissions: {}
+jobs:
+  jira-traceability:
+    name: Jira key in branch and PR title
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+      PR_TITLE: ${{ github.event.pull_request.title }}
+    steps:
+      - name: Match the Jira key
+        shell: bash
+        run: |
+          if [[ ! "$HEAD_BRANCH" =~ ^(feature|bugfix|hotfix)/(LMR-[1-9][0-9]*)-[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+            echo 'Use feature/, bugfix/ or hotfix/ with an LMR key and a lowercase slug.'
+            exit 1
+          fi
+          jira_key="${BASH_REMATCH[2]}"
+          if [[ "$PR_TITLE" != "$jira_key: "* || "$PR_TITLE" == "$jira_key: " ]]; then
+            echo 'Start the pull request title with the branch Jira key, a colon and a description.'
+            exit 1
+          fi
+          printf 'Branch and pull request title agree on %s. The reviewer verifies the Jira link.\n' "$jira_key"
