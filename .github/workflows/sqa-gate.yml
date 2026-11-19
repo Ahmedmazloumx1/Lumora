@@ -42,16 +42,56 @@ jobs:
         with:
           node-version: '22'
       - name: Static syntax and credential checks
+        id: syntax
         run: |
           mkdir -p sqa-evidence
           node scripts/sqa-checks.mjs 2>&1 | tee sqa-evidence/syntax.log
       - name: Isolated storefront and SQL regression suite
+        id: smoke
         run: node tests/smoke.mjs 2>&1 | tee sqa-evidence/smoke.log
+      - name: Install PHPStan
+        run: composer global require --dev phpstan/phpstan:2.3.3 --no-interaction --no-progress
+      - name: Dependency audit
+        id: audit
+        run: composer global audit --locked 2>&1 | tee sqa-evidence/dependency-audit.log
       - name: PHP static analysis
+        id: phpstan
         run: |
-          composer global require --dev phpstan/phpstan:2.3.3 --no-interaction --no-progress
-          composer global audit --locked 2>&1 | tee sqa-evidence/dependency-audit.log
-          "$(composer global config bin-dir --absolute)/phpstan" analyse -c phpstan.neon --no-progress 2>&1 | tee sqa-evidence/phpstan.log
+          "$(composer global config bin-dir --absolute)/phpstan" analyse -c phpstan.neon --no-progress --error-format=json | tee sqa-evidence/phpstan.json
+      - name: Record evidence identifiers
+        if: always()
+        env:
+          SQA_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          SQA_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          SQA_TESTED_SHA: ${{ github.sha }}
+          SQA_PR_NUMBER: ${{ github.event.pull_request.number }}
+          SQA_RUN_ATTEMPT: ${{ github.run_attempt }}
+          SQA_JOB_STATUS: ${{ job.status }}
+          SQA_SYNTAX: ${{ steps.syntax.outcome }}
+          SQA_SMOKE: ${{ steps.smoke.outcome }}
+          SQA_AUDIT: ${{ steps.audit.outcome }}
+          SQA_PHPSTAN: ${{ steps.phpstan.outcome }}
+        run: |
+          mkdir -p sqa-evidence
+          {
+            printf 'Run: %s (attempt %s)\n' "$SQA_RUN_URL" "$SQA_RUN_ATTEMPT"
+            printf 'Pull request: %s\n' "${SQA_PR_NUMBER:-manual run}"
+            printf 'Head revision: %s\n' "$SQA_HEAD_SHA"
+            printf 'Tested revision: %s\n' "$SQA_TESTED_SHA"
+            printf 'Check status: %s\n' "$SQA_JOB_STATUS"
+          } > sqa-evidence/run.txt
+          {
+            printf '## Lumora quality checks\n\n'
+            printf '| Check | Outcome |\n| --- | --- |\n'
+            printf '| Syntax and credential patterns | %s |\n' "${SQA_SYNTAX:-not run}"
+            printf '| Storefront and SQL regression | %s |\n' "${SQA_SMOKE:-not run}"
+            printf '| Composer dependency audit | %s |\n' "${SQA_AUDIT:-not run}"
+            printf '| PHPStan | %s |\n' "${SQA_PHPSTAN:-not run}"
+            printf '\n```text\n'
+            cat sqa-evidence/run.txt
+            printf '```\n\n'
+            printf 'Download the run artifact for the PHPStan JSON and individual check logs.\n'
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Retain quality evidence
         if: always()
         uses: actions/upload-artifact@v4
